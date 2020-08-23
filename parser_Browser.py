@@ -8,6 +8,7 @@ from utils.spinner import Spinner
 from config import __GC_DB, FOLDERTREE_JSON, USERCODE, PROJECT_NAME
 from dataChip import Chip, Primitive_Bookmark
 from ChipOps.dfh import JSON
+from utils.timeHandle import timestamp_from_webkit
 
 from treelib import Tree
 from treelib.exceptions import DuplicatedNodeIdError
@@ -18,7 +19,7 @@ class TreeOctane(Tree):
 
     @staticmethod
     def to_JSON():
-        JSON.storeObjects(FOLDERTREE_JSON, jsonObj = json.loads(tree.to_json(with_data = True)))
+        JSON.storeObjects(FOLDERTREE_JSON, jsonObj = json.loads(tree.to_json(with_data = False)))
 
     # @Override
     def to_dict(self, nid=None, key=None, sort=True, reverse=False, with_data=False):
@@ -98,7 +99,7 @@ def import_from_Browser(BrowserName, db_path, loader, mute = False):
                 yield bookmark
 
     except Exception as e:
-        print("Unable to import bookmarks from {}\n".format(BrowserName))
+        print("\nUnable to import bookmarks from {}".format(BrowserName))
         raise e
 
 
@@ -155,6 +156,7 @@ def digJSONTree(sublist, foldersStack):
             p_bm = Primitive_Bookmark()
             p_bm.name = item["name"]
             p_bm.url = item["url"]
+            p_bm.date_added = timestamp_from_webkit(int(item["date_added"]))
             p_bm.foldersStack = foldersStack
             chip = Chip(p_bm)
 

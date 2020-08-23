@@ -2,13 +2,16 @@
 .ropeproject/
 .vscode/
 __pycache__/
-FrontEnd/node_modules/
+node_modules/
+.sass-cache/
+*.min.css.map
 
 # Ignore Discarded/Archived Files
 Dump/
 
 # Ignore Personal Info Files
 data/
+config.json
 
 # Ignore Temporary Output Files
 temp/

@@ -1,0 +1,251 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400);
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@import url("https://rsms.me/inter/inter.css");
+
+$base-color: #0b4a7e;
+
+$item-text-color: black;
+$item-bg-color: white;
+$item-bg-color-hover: #cbcbcb;
+
+$addItemBtn-bg-color: #00a65a;
+$addItemBtn-bg-color-hover: #ffa600;
+
+$tree-branch-color: #999;
+$tree-branch-thickness: 2px;
+
+.tree-wrapper {
+	position: relative;
+	top: 250px;
+
+	width: auto;
+	overflow: auto;
+
+	border-top: 1px solid grey;
+	margin: 10px 0 20px 0;
+
+	* {
+		font-family: "Inter", sans-serif;
+	}
+
+	button#tree-refresh {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		font-size: 20px;
+
+		color: white;
+		background: transparent;
+		outline: none;
+		border: none;
+		cursor: pointer;
+
+		@media (max-width: 1400px) {
+			left: -5px;
+		}
+
+		p {
+			position: relative;
+			top: -3px;
+			left: 10px;
+			// font-family: Arial, Helvetica, sans-serif;
+			font-size: 0.7rem;
+			color: lighten($color: $base-color, $amount: 25);
+			display: inline;
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0s, opacity 0.5s ease;
+		}
+
+		&:hover p {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+.tree {
+	color: $item-text-color;
+	position: relative;
+	// top: 220px;
+	min-height: 20px;
+	padding: 19px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+
+	@media (max-width: 1400px) {
+		margin-left: 10px;
+	}
+
+	&_li {
+		position: relative;
+		margin: 0;
+		padding: 10px 5px 0 15px; // +10px on left padding (last one) to increase the width of the tree
+		list-style-type: none;
+
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			left: -20px;
+			right: auto;
+		}
+
+		&:before {
+			border-left: $tree-branch-thickness solid $tree-branch-color;
+			height: 100%;
+			top: -5px;
+			width: 1px;
+		}
+
+		&:after {
+			border-top: $tree-branch-thickness solid $tree-branch-color;
+			height: 20px;
+			top: 25px;
+			width: 35px; // +10px on width to increase the width of the tree
+		}
+
+		&:last-child:before {
+			height: 30px;
+		}
+
+		&--disabled {
+			color: #cbcbcb;
+		}
+	}
+
+	&_parent {
+		position: relative;
+
+		.tree_item:hover + ul li .tree_item:not(.tree_item--active) {
+			background-color: $item-bg-color-hover;
+
+			&.tree_item--addBtn {
+				&:before,
+				button {
+					background-color: $addItemBtn-bg-color-hover;
+				}
+			}
+		}
+	}
+
+	& > ul > li:before,
+	& > ul > li:after {
+		border: 0;
+	}
+
+	&_icon {
+		margin-right: 3px;
+		color: $base-color;
+	}
+
+	&_item {
+		display: inline-block;
+		padding: 3px 8px;
+		background-color: $item-bg-color;
+		// border: $tree-branch-thickness solid $tree-branch-color;
+		border: none;
+		border-radius: 5px;
+		text-decoration: none;
+		white-space: nowrap;
+		cursor: default;
+
+		&:hover {
+			background-color: $item-bg-color-hover;
+		}
+
+		&--active {
+			background-color: $base-color;
+			color: #fff;
+
+			&:hover {
+				background-color: darken($base-color, 2%);
+			}
+
+			.tree_icon {
+				background-color: $base-color;
+				color: #fff;
+			}
+		}
+
+		&--addBtn {
+			border: none;
+			padding: 0;
+			position: relative;
+			top: 5px;
+
+			&:before {
+				// font-family: Arial, Helvetica, sans-serif;
+				font-size: 0.9rem;
+				color: white;
+				background-color: $addItemBtn-bg-color;
+				content: "Add Item";
+				height: 16px;
+
+				border: none;
+				border-radius: 5px;
+				padding: 0.14em 8px;
+				position: absolute;
+				right: -5em;
+				top: -0.03em;
+				cursor: pointer;
+			}
+
+			button {
+				height: 20px;
+				background-color: $addItemBtn-bg-color;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				outline: none;
+				cursor: pointer;
+			}
+		}
+	}
+
+	&_child-list {
+		display: none;
+		padding: 5px 0px 5px 25px;
+	}
+
+	&_menu {
+		display: none;
+		position: fixed;
+		z-index: 1000;
+		overflow: hidden;
+		// width: 120px;
+		padding: 0;
+		background: #fff;
+		color: #333;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+		transition: all 0.3s ease;
+
+		&-options {
+			padding: 10px 0;
+			z-index: 1000;
+		}
+
+		&-option {
+			font-weight: 500;
+			font-size: 0.8rem;
+			padding: 10px 40px 10px 20px;
+			cursor: pointer;
+			user-select: none;
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.2);
+			}
+
+			&-remove {
+				background: rgb(236, 41, 41);
+				color: rgb(255, 255, 255);
+
+				&:hover {
+					background: darken(rgb(236, 41, 41), 15%);
+				}
+			}
+		}
+	}
+}

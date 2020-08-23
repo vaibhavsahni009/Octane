@@ -1,31 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base target="_blank">
-    <title>Chips List</title>
+<html lang="en" >
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Tree menu</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+		<link rel="stylesheet" href="dist/css/dragula.min.css">
+		<script src="Isolated_Features/js/modules/lunr.js"></script>
+		<script src="Isolated_Features/js/modules/fuse.js"></script>
 
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/search.css" />
+		<link rel="stylesheet" href="dist/css/sidebar.css">
+		<link rel="stylesheet" href="dist/css/modal.css">
+		<link rel="stylesheet" href="dist/css/style.min.css">
+        <link rel="stylesheet" href="Isolated_Features/css/search.css" />
 
-    <!-- <script data-main="js/script" src="js/require.js"></script> -->
-    <script src="js/modules/lunr.js"></script>
-    <script src="js/modules/fuse.js"></script>
-</head>
-<body>
-    <div class="search">
-        <input autocomplete="on" class="search-input" type="search" placeholder="Click me to type!">
-        <svg viewbox="0 0 24 24">
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-            <path d="M0 0h24v24H0z" fill="none">
-        </svg>
-    </div>
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	</head>
 
-    <div class="search-results"></div>
+	<body>
+		<div id="wrapper">
+			<!-- SIDEBAR -->
+			<div id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+					<li class="sidebar-brand">
+						<!-- <a href="#">
+							OCTANE
+						</a> -->
+                        <div class="btn-shine">
+                            <span>O</span>
+                            <span>C</span>
+                            <span>T</span>
+                            <span>A</span>
+                            <span>N</span>
+                            <span>E</span>
+                        </div>
+					</li>
+					<li>
+						<a href="index.html">Dashboard</a>
+					</li>
+					<li>
+						<a href="./Isolated_Features/card.html">Card View</a>
+					</li>
+					<li>
+						<a href="search.html">Search</a>
+					</li>
+					<li>
+						<a href="#">About</a>
+					</li>
+				</ul>
+				<!-- TREE MENU -->
+				<div class="tree_menu">
+					<ul class="tree_menu-options">
+						<li class="tree_menu-option tree_menu-option-edit" data-action="edit">EDIT</li>
+						<li class="tree_menu-option tree_menu-option-remove" data-action="remove">REMOVE</li>
+					</ul>
+				</div>
+				<!-- /TREE MENU -->
 
-    <script type="text/javascript" src="js/search.js"></script>
-</body>
+				<!-- TREE -->
+				<div class="tree-wrapper">
+					<button id="tree-refresh"><i class="fa fa-refresh"></i><p>Fetch Fresh Data</p></button>
+					<ul id="tree" class="tree">
+						<li class="tree_li">
+							<span class="tree_item tree_item--addBtn">
+							<button class="fa fa-plus-circle"></button>
+							</span>
+						</li>
+					</ul>
+				</div>
+				<!-- /TREE -->
+			</div>
+			<!-- /SIDEBAR -->
+
+			<!-- PAGE CONTENT -->
+			<div id="page-content-wrapper">
+				<button class="toggle-button" id="menu-toggle"><i class="fa fa-bars"></i></button>
+				<div class="search">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+					<input autocomplete="on" class="search-input" type="search" placeholder="Click me to type!">
+					<svg viewbox="0 0 24 24">
+						<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+						<path d="M0 0h24v24H0z" fill="none">
+					</svg>
+				</div>
+				<div class="search-results"></div>
+
+				<!-- <h1>Page Content</h1>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates rem porro ipsam odio ad! Fugiat totam eligendi ducimus repellendus hic? Voluptates vel laboriosam repellendus aperiam deleniti temporibus libero minus aspernatur. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsum mollitia, iste magnam non placeat nisi autem? Officiis tempora quibusdam itaque temporibus sequi deleniti, accusantium rem corrupti iure incidunt? Reiciendis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit dignissimos, ex ea, pariatur et cupiditate voluptates iste assumenda quod dolorum esse necessitatibus nihil excepturi deleniti consequuntur aliquid laboriosam, voluptas natus.</p>
+				<p>All page content should be within the <code>#page-content-wrapper</code>.</p> -->
+				<!-- <div id="myData"></div> -->
+			</div>
+			<!-- /PAGE CONTENT -->
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="dist/js/dragula.min.js"></script>
+
+        <script src="Isolated_Features/js/search.js"></script>
+
+		<script src="dist/js/treeListeners.js"></script>
+		<script src="dist/js/treePopulate.js"></script>
+		<script src="dist/js/contextmenu.js"></script>
+		<script src="dist/js/modal.js"></script>
+		<script src="dist/js/saveState.js"></script>
+		<script src="dist/js/dragndrop.js"></script>
+
+		<script src="dist/js/sidebar.js"></script>
+	</body>
 </html>
